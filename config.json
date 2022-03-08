@@ -1,0 +1,18 @@
+{
+  "fade_steps": 10,
+  "timezone": "US/Pacific",
+  "change_times": {
+    "night_begins": 18,
+    "night_ends": 7
+  },
+  "theme": {
+    "night": {
+      "on": [255,0,0],
+      "off": [5,0,0]
+    },
+    "day": {
+      "on": [255,255,255],
+      "off": [0,0,0]
+    }
+  }
+}
