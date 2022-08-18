@@ -89,15 +89,17 @@ class MyApp:
         loop.run_forever()
 
     def wifi_start_access_point(self):
-        wifi = network.WLAN(network.AP_IF)
+        gc.collect();
 
-        found_networks = wifi.scan()
+        wifi = network.WLAN(network.AP_IF)
 
         wifi.config(ssid=SERVER_SSID, security=0)
         wifi.active(True)
 
         while wifi.active() == False:
           pass
+
+        found_networks = wifi.scan()
 
         # We need to reset any DNS options the wifi may have cached
         ifconfig = wifi.ifconfig()
@@ -140,12 +142,15 @@ class MyApp:
 
             # See if a file matching the path exists
             try:
-                response = 'HTTP/1.0 200 OK\r\n\r\n'
-
                 filename = path.replace('/', '', 1)
 
                 with open(filename) as f:
-                    response += f.read()
+                    response = 'HTTP/1.0 200 OK\r\n\r\n'
+                    await writer.awrite(response)
+
+                    # We can't fit it all in memory at once so chunk it up
+                    while chunk := f.read(1024):
+                        await writer.awrite(chunk)
 
                 print('  Sent {}'.format(filename))
 
@@ -185,8 +190,9 @@ class MyApp:
         await writer.aclose()
 
         if should_reboot:
+            print("Resetting in 5 seconds...")
             await asyncio.sleep(5)
-            machine.soft_reset()
+            machine.reset()
 
     async def run_dns_server(self):
         """ function to handle incoming dns requests """

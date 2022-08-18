@@ -57,7 +57,7 @@ async def connect_to_wifi(wifi_settings):
     wlan = network.WLAN(network.STA_IF)
     # wlan.config(hostname='fuzzy-clock')
     wlan.active(True)
-    wlan.connect(wifi_settings['ssid'], wifi_settings['password'])
+    wlan.connect(wifi_settings['network'], wifi_settings['passcode'])
 
     while wlan.isconnected() == False:
         print('  Waiting for connection...')
@@ -259,7 +259,7 @@ async def connect_and_serve():
         loop.run_forever()
 
     except Exception as reason:
-        print("Caught exception {}".format(reason))
+        print(reason)
         raise reason
 
 def start():
