@@ -1,6 +1,7 @@
 {
   "fade_steps": 10,
-  "timezone": "US/Pacific",
+  "timezone_offset": -8,
+  "use_dst": true,
   "change_times": {
     "night_begins": 18,
     "night_ends": 7

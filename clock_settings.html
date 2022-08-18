@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Fuzzy Clock Setup</title>
+        <meta charset="utf8">
+        <meta name="viewport" content="width=device-width
+        initial-scale=1">
+        <link rel="stylesheet" href="pico.min.css">
+    </head>
+    <body>
+        <main class="container" style="padding-top: 0;">
+            <article style="display: {save_success_display}; background-color: #eeeeff; padding: 1em;">
+                <h5 style="text-align: center; margin: 0;">Settings saved!</h5>
+              </article>
+
+            <form action="/config" method="post">
+                <article>
+                    <header>
+                        <h2>Fuzzy Clock Configuration</h2>
+
+                        <div style='text-align: right;'>
+                            <mark>Remember to hit save after making changes</mark>
+                        </div>
+                    </header>
+
+                    <h5>Time zone</h5>
+
+                    <label for="timezone">Time Zone</label>
+                    <select id="timezone" name="timezone">
+                        {timezone_options}
+                    </select>
+
+                    <label for="use_dst" style='margin-bottom: 2em;'>
+                        <input type="checkbox" id="use_dst" name="use_dst" {use_dst}>
+                        Daylight Savings Time
+                    </label>
+
+                    <details>
+                        <summary><small>Other time zone (only use this if outside USA)</small></summary>
+                        <label for="timeoffset">
+                            Timezone offset in hours from GMT
+                            <input type="text" id="timeoffset" name="timeoffset" value="{timezone_offset}">
+                        </label>
+                    </details>
+
+                    <h5>Night mode timing</h5>
+
+                    <label for="nightstart">Night mode begin time</label>
+                    <select id="nightstart" name="nightstart">
+                      {night_start_options}
+                    </select>
+
+                    <label for="nightend">Night mode end time</label>
+                    <select id="nightend" name="nightend">
+                      {night_end_options}
+                    </select>
+
+                    <hr />
+
+                    <h5>Color Scheme</h5>
+
+                    <div class="grid">
+                      <label for="day_foreground">Day foreground
+                        <input type="color" id="day_foreground" name="day_foreground" value="{day_foreground}">
+                      </label>
+
+                      <label for="day_background">Day background
+                        <input type="color" id="day_background" name="day_background" value="{day_background}">
+                      </label>
+                    </div>
+
+                    <div class="grid">
+                      <label for="night_foreground">Night foreground
+                        <input type="color" id="night_foreground" name="night_foreground" value="{night_foreground}">
+                      </label>
+
+                      <label for="night_background">Night background
+                        <input type="color" id="night_background" name="night_background" value="{night_background}">
+                      </label>
+                    </div>
+
+                    <h5>Animation</h5>
+
+                    <label for="fade_steps">
+                      Number of fade steps
+                      <small>(affects how fast time changes animate, more steps is a slower animation)</small>
+                      <input type="text" id="fade_steps" name="fade_steps" value="{fade_steps}">
+                    </label>
+
+                    <footer>
+                        <button type="submit">Save</button>
+                    </footer>
+                </article>
+            </form>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Fuzzy Clock Setup</title>
+        <meta charset="utf8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="pico.min.css">
+    </head>
+    <body>
+        <main class="container">
+            <h1>Fuzzy Wall Clock Initial Setup</h1>
+            <form action="/setup" method="post">
+                <h3>Please select your wifi network</h3>
+
+                <label for="network">Network</label>
+                <select id="network" name="network" required>
+                    <option value="" selected>Select a network</option>
+                    {available_networks}
+                </select>
+
+                <label for="passcode">
+                  Password
+                  <input type="password" id="passcode" name="passcode" placeholder="Wifi Password" required>
+                </label>
+
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+    </body>
+</html>
