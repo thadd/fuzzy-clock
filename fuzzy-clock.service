@@ -1,0 +1,14 @@
+[Unit]
+Description=Fuzzy Clock
+After=network-online.target
+ 
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/clock/clock.py
+WorkingDirectory=/home/pi/clock
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+ 
+[Install]
+WantedBy=multi-user.target
